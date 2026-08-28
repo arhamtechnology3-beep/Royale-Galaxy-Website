@@ -308,8 +308,8 @@ export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site 
                     outline: 'none'
                   }}
                 >
-                  <option value="1 BHK">1 BHK Balcony Flat (350 sq.ft)</option>
-                  <option value="2 BHK">2 BHK Master Suite Flat (478-487 sq.ft)</option>
+                  <option value="1 BHK">1 BHK Balcony Flat</option>
+                  <option value="2 BHK">2 BHK Master Suite Flat</option>
                   <option value="3 BHK">3 BHK Custom Combination Flat</option>
                   <option value="4 BHK">4 BHK Custom Luxury Suite</option>
                   <option value="Commercial Shop">Ground Floor Commercial Shop</option>

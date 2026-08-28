@@ -40,7 +40,7 @@ export default function RenderGallery() {
       src: '/assets/3d-views/INDOOR GAME CAM -01.jpg',
       title: 'Indoor Gaming Arena',
       category: 'amenities',
-      desc: 'Recreational indoor games lounge equipped with table tennis, carrom, chess, and foosball.'
+      desc: 'Vibrant indoor gaming lounge designed for fun, recreation, and family entertainment.'
     },
     {
       src: '/assets/3d-views/INDOOR GAME CAM -02.jpg',
@@ -64,7 +64,7 @@ export default function RenderGallery() {
       src: '/assets/3d-views/TERRECE GARDEN CAM-01.jpg',
       title: 'Rooftop Sky Terrace Promenade',
       category: 'terrace',
-      desc: 'Lush landscaped garden walkway under the open night sky.'
+      desc: 'Lush landscaped garden walkway with comfortable seating under the open sky.'
     },
     {
       src: '/assets/3d-views/TERRECE GARDEN CAM-02.jpg',
@@ -76,7 +76,7 @@ export default function RenderGallery() {
       src: '/assets/3d-views/TERRECE GARDEN CAM-03.jpg',
       title: 'Rooftop Meditation & Yoga Deck',
       category: 'terrace',
-      desc: 'Serene open-air wellness pavilion surrounded by vertical green walls.'
+      desc: 'Peaceful rooftop space designed for yoga, meditation, and moments of mindful relaxation.'
     },
     {
       src: '/assets/3d-views/TERRECE GARDEN CAM-04.jpg',
@@ -94,7 +94,7 @@ export default function RenderGallery() {
       src: '/assets/3d-views/TERRECE GARDEN CAM-06.jpg',
       title: 'Sky Lounge & Acupressure Walk',
       category: 'terrace',
-      desc: 'Therapeutic pebble walkway and comfortable seating alcoves.'
+      desc: 'Therapeutic pebble walkway with comfortable seating spaces for relaxation and rejuvenation.'
     }
   ];
 

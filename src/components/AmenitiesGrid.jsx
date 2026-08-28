@@ -16,10 +16,10 @@ export default function AmenitiesGrid({ onOpenLeadModal }) {
     {
       id: 'yoga',
       icon: <Sun size={22} />,
-      title: 'Yoga & Meditation Pavilion',
+      title: 'Rooftop Meditation & Yoga Deck',
       category: 'Rooftop Sky Park',
       image: '/assets/3d-views/TERRECE GARDEN CAM-03.jpg',
-      desc: 'Dedicated tranquil open-air deck surrounded by vertical green planters for morning mind-body wellness.'
+      desc: 'Peaceful rooftop space designed for yoga, meditation, and moments of mindful relaxation.'
     },
     {
       id: 'open-gym',
@@ -40,10 +40,10 @@ export default function AmenitiesGrid({ onOpenLeadModal }) {
     {
       id: 'acupressure',
       icon: <Sparkles size={22} />,
-      title: 'Acupressure Reflexology Walkway',
+      title: 'Sky Lounge & Acupressure Walk',
       category: 'Rooftop Sky Park',
       image: '/assets/3d-views/TERRECE GARDEN CAM-06.jpg',
-      desc: 'Therapeutic pebble walkway designed to stimulate reflex points for senior citizens and wellness enthusiasts.'
+      desc: 'Therapeutic pebble walkway with comfortable seating spaces for relaxation and rejuvenation.'
     },
     {
       id: 'indoor-gym',
@@ -56,10 +56,10 @@ export default function AmenitiesGrid({ onOpenLeadModal }) {
     {
       id: 'indoor-games',
       icon: <Trophy size={22} />,
-      title: 'Indoor Gaming Lounge',
+      title: 'Indoor Gaming Arena',
       category: 'Clubhouse Level',
       image: '/assets/3d-views/INDOOR GAME CAM -01.jpg',
-      desc: 'Recreational zone with Table Tennis, Carrom, Chess, and Foosball tables for active indoor recreation.'
+      desc: 'Vibrant indoor gaming lounge designed for fun, recreation, and family entertainment.'
     },
     {
       id: 'library',
