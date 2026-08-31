@@ -1,5 +1,18 @@
 # Royale Galaxy Website - Project Changelog & Updates
 
+## [2026-08-31] - Latest RERA Certificate Update
+
+### 1. Document Update
+- Replaced old RERA certificate with the latest official MahaRERA Registration Certificate (`PR1330002502267`, Correction-1 dated 17/07/2026).
+- Updated PDF asset at `public/assets/docs/certificate.pdf` and production bundle asset `dist/assets/docs/certificate.pdf`.
+
+### 2. Build & Deployment
+- Rebuilt production bundle using Vite (`npm run build`).
+- Re-generated zip deployment archives (`dist.zip` and `royalegalaxy-dist.zip`).
+- Pushed live updates to git deployment repositories (`origin` and `hostinger`).
+
+---
+
 ## [2026-08-28] - Amenities & Lead Form Updates
 
 ### 1. Amenities Section & 3D Render Gallery Updates
