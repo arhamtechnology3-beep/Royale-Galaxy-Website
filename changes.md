@@ -1,5 +1,22 @@
 # Royale Galaxy Website - Project Changelog & Updates
 
+## [2026-09-03] - 3D Architectural Render Gallery Expansion
+
+### 1. New 3D Visual Assets Added
+- Added 3 high-resolution architectural elevation renders:
+  - **Illuminated Night Elevation** (`CAM-08 (NIGHT VIEW).jpg`): Showcasing the majestic tower lit up at night with crown lighting and moonlit ambience.
+  - **Grand Entrance Arch & Facade** (`CAM-09 (GRAND ENTRANCE).jpg`): Showcasing the ornate grand entrance archway, security gate, and ground floor commercial storefronts.
+  - **Daylight Elevation & Boulevard** (`CAM-10 (DAY ELEVATION).jpg`): Full front architectural elevation rendered in crisp daylight showcasing residential balconies and entrance boulevard.
+- Integrated into `src/components/RenderGallery.jsx` under the **"Aerial & Facade"** category tab.
+- Made total render count dynamic on filter tabs (`All Renders (18)`).
+
+### 2. Build & Deployment
+- Rebuilt production bundle using Vite (`npm run build`).
+- Updated zip archives (`dist.zip` and `royalegalaxy-dist.zip`).
+- Pushed live updates to git repositories (`origin` and `hostinger`).
+
+---
+
 ## [2026-08-31] - Latest RERA Certificate Update
 
 ### 1. Document Update

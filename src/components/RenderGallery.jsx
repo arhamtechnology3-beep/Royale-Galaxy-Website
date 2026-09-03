@@ -25,6 +25,24 @@ export default function RenderGallery() {
       desc: 'Refined architectural facade standing tall with modern urban glasswork and structured lighting.'
     },
     {
+      src: '/assets/3d-views/CAM-08 (NIGHT VIEW).jpg',
+      title: 'Illuminated Night Elevation',
+      category: 'aerial',
+      desc: 'Stunning nocturnal perspective highlighting the architectural facade, crown lighting, and ambient glow.'
+    },
+    {
+      src: '/assets/3d-views/CAM-09 (GRAND ENTRANCE).jpg',
+      title: 'Grand Entrance Arch & Facade',
+      category: 'aerial',
+      desc: 'Majestic entrance gate with ornate archway, security plaza, and luxury storefront elevation.'
+    },
+    {
+      src: '/assets/3d-views/CAM-10 (DAY ELEVATION).jpg',
+      title: 'Daylight Elevation & Boulevard',
+      category: 'aerial',
+      desc: 'Full front architectural elevation rendered in crisp daylight showcasing the residential floors and surrounding greenery.'
+    },
+    {
       src: '/assets/3d-views/Enterance Lobby.jpg',
       title: 'Double-Height Entrance Lobby',
       category: 'lobby',
@@ -150,7 +168,7 @@ export default function RenderGallery() {
         {/* Filter Tabs */}
         <div className="horizontal-scroll-track" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px', marginBottom: '32px', width: '100%' }}>
           {[
-            { id: 'all', label: 'All Renders (15)' },
+            { id: 'all', label: `All Renders (${renders.length})` },
             { id: 'aerial', label: 'Aerial & Facade' },
             { id: 'lobby', label: 'Grand Lobby' },
             { id: 'terrace', label: 'Rooftop Sky Park' },
