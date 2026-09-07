@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, Globe, MapPin, ShieldCheck, Download, FileText, ArrowUp } from 'lucide-react';
+import { Phone, Mail, Globe, MapPin, ShieldCheck, Download, ArrowUp } from 'lucide-react';
 
 export default function Footer({ onOpenLeadModal }) {
   const scrollToTop = () => {
@@ -107,13 +107,13 @@ export default function Footer({ onOpenLeadModal }) {
             </div>
           </div>
 
-          {/* Download & RERA Verification */}
+          {/* Brochure Download */}
           <div>
             <h4 className="font-serif" style={{ color: '#FFF', fontSize: '1.1rem', marginBottom: '16px' }}>
               Project Documentation
             </h4>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '16px' }}>
-              Download official RERA certificates and brochure PDF documents directly.
+              Fill a quick inquiry form to unlock and download the official brochure PDF.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <button
@@ -123,15 +123,6 @@ export default function Footer({ onOpenLeadModal }) {
               >
                 <Download size={14} /> Download E-Brochure PDF
               </button>
-              <a
-                href="/assets/docs/certificate.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-secondary"
-                style={{ width: '100%', justifyContent: 'center', fontSize: '0.85rem', textDecoration: 'none' }}
-              >
-                <FileText size={14} /> View RERA Certificate
-              </a>
             </div>
           </div>
         </div>

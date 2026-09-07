@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, Download, ShieldCheck, FileText, Loader2, Mail } from 'lucide-react';
+import { X, CheckCircle2, Download, ShieldCheck, Loader2, Mail } from 'lucide-react';
 
 export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site Visit' }) {
   const [fullName, setFullName] = useState('');
@@ -71,7 +71,34 @@ export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site 
       console.error('Local backup save error:', err);
     }
 
-    // Send lead directly to Royalegalaxysales@gmail.com via FormSubmit (from submissions@formsubmit.co)
+    const sheetPayload = {
+      name: fullName.trim(),
+      email: cleanEmail,
+      phone: formattedPhone,
+      configuration: unitType,
+      intent: initialIntent,
+      project: 'Royale Galaxy Kalyan East',
+      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      source: 'Website Form'
+    };
+
+    // Save lead row into Google Sheet (configured via VITE_GOOGLE_SHEET_WEBHOOK)
+    const sheetWebhook = import.meta.env.VITE_GOOGLE_SHEET_WEBHOOK;
+    if (sheetWebhook) {
+      try {
+        // text/plain avoids CORS preflight with Google Apps Script web apps
+        await fetch(sheetWebhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(sheetPayload),
+          redirect: 'follow'
+        });
+      } catch (error) {
+        console.error('Google Sheet lead delivery error:', error);
+      }
+    }
+
+    // Send lead email to Royalegalaxysales@gmail.com via FormSubmit
     try {
       await fetch('https://formsubmit.co/ajax/Royalegalaxysales@gmail.com', {
         method: 'POST',
@@ -86,10 +113,14 @@ export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site 
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);
+      // Unlock brochure only after form is successfully submitted
+      if (/brochure/i.test(initialIntent)) {
+        setTimeout(() => triggerBrochureDownload(), 400);
+      }
     }
   };
 
-  const handleBrochureDownload = () => {
+  const triggerBrochureDownload = () => {
     const link = document.createElement('a');
     link.href = '/assets/docs/brochure.pdf';
     link.download = 'Royale_Galaxy_Official_Brochure.pdf';
@@ -98,14 +129,13 @@ export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site 
     document.body.removeChild(link);
   };
 
-  const handleCertificateDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/assets/docs/certificate.pdf';
-    link.download = 'Royale_Galaxy_MahaRERA_Certificate.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleBrochureDownload = () => {
+    // Brochure is gated — only available after the inquiry form is submitted
+    if (!submitted) return;
+    triggerBrochureDownload();
   };
+
+  const isBrochureIntent = /brochure/i.test(initialIntent);
 
   return (
     <div
@@ -169,7 +199,9 @@ export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site 
               {initialIntent}
             </h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', marginBottom: '20px' }}>
-              Connect with our official sales lounge team for instant price sheets, floor plan PDFs, and priority site visit slots.
+              {isBrochureIntent
+                ? 'Please share your details below. The official brochure PDF will unlock for download only after you submit this form.'
+                : 'Connect with our official sales lounge team for instant price sheets, floor plan PDFs, and priority site visit slots.'}
             </p>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -326,29 +358,13 @@ export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site 
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                     <Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} /> Submitting Lead...
                   </span>
+                ) : isBrochureIntent ? (
+                  'Submit & Unlock Brochure'
                 ) : (
                   'Submit & Request Callback'
                 )}
               </button>
             </form>
-
-            {/* Direct Instant PDF Download Links */}
-            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', gap: '10px' }}>
-              <button
-                onClick={handleBrochureDownload}
-                className="btn-outline-gold"
-                style={{ flex: 1, padding: '8px 10px', fontSize: '0.75rem', justifyContent: 'center' }}
-              >
-                <Download size={12} /> Brochure PDF
-              </button>
-              <button
-                onClick={handleCertificateDownload}
-                className="btn-secondary"
-                style={{ flex: 1, padding: '8px 10px', fontSize: '0.75rem', justifyContent: 'center' }}
-              >
-                <FileText size={12} /> RERA Certificate
-              </button>
-            </div>
           </div>
         ) : (
           <div style={{ textAlign: 'center', padding: '16px 0' }}>

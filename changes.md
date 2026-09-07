@@ -1,5 +1,15 @@
 # Royale Galaxy Website - Project Changelog & Updates
 
+## [2026-09-07] - Removed MahaRERA Certificate
+
+### 1. Certificate Removal
+- Removed "View RERA Certificate" link from the footer documentation section.
+- Removed RERA Certificate download button from the lead inquiry modal.
+- Deleted `public/assets/docs/certificate.pdf` and matching production asset.
+- Kept brochure download and MahaRERA registration number badges/disclaimer intact.
+
+---
+
 ## [2026-09-03] - 3D Architectural Render Gallery Expansion
 
 ### 1. New 3D Visual Assets Added
