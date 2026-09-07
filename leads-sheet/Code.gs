@@ -4,40 +4,93 @@
  * YOUR SHEET: Royale Galaxy Website Leads
  * SHEET ID: 1J2t-G8VGbE9QO4z-blkCL3MkR-1ldQV1bxMTii6zZFI
  *
- * NEXT STEPS:
- * 1. Replace all code in Apps Script with this file → Save (Ctrl/Cmd+S)
- * 2. Deploy → New deployment → Web app
- *    - Execute as: Me
- *    - Who has access: Anyone
- * 3. Copy the Web App URL (ends with /exec)
- * 4. That URL is the value for:
- *    VITE_GOOGLE_SHEET_WEBHOOK=<paste URL here>
+ * UPDATE STEPS (required after any Code.gs change):
+ * 1. Paste this full file into Apps Script → Save
+ * 2. Deploy → Manage deployments → Edit (pencil)
+ * 3. Version: New version → Deploy
+ * 4. Optional: select fixExistingPhoneErrors → Run (repairs old #ERROR! cells)
  */
 
-// Bound to your "Royale Galaxy Website Leads" spreadsheet
 const SPREADSHEET_ID = '1J2t-G8VGbE9QO4z-blkCL3MkR-1ldQV1bxMTii6zZFI';
-// Use the main tab the client is viewing (Sheet1)
-const SHEET_NAME = 'Sheet1';
+const SHEET_NAME = 'Leads';
 
 function doPost(e) {
   try {
     const data = parsePayload_(e);
     const sheet = getOrCreateSheet_();
+    ensurePhoneColumnIsText_(sheet);
 
-    sheet.appendRow([
-      data.submittedAt || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-      data.name || '',
-      data.email || '',
-      data.phone || '',
-      data.configuration || '',
-      data.intent || '',
-      data.project || 'Royale Galaxy Kalyan East',
-      data.source || 'Website Form'
-    ]);
+    const row = sheet.getLastRow() + 1;
+    const phone = toSafePhoneText_(data.phone);
 
-    return jsonResponse_({ result: 'success' });
+    sheet.getRange(row, 1).setValue(
+      data.submittedAt || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+    );
+    sheet.getRange(row, 2).setValue(data.name || '');
+    sheet.getRange(row, 3).setValue(data.email || '');
+
+    // CRITICAL: format as plain text BEFORE writing, never leading +/=
+    sheet.getRange(row, 4).setNumberFormat('@').setValue(phone);
+
+    sheet.getRange(row, 5).setValue(data.configuration || '');
+    sheet.getRange(row, 6).setValue(data.intent || '');
+    sheet.getRange(row, 7).setValue(data.project || 'Royale Galaxy Kalyan East');
+    sheet.getRange(row, 8).setValue(data.source || 'Website Form');
+
+    return jsonResponse_({ result: 'success', phone: phone });
   } catch (err) {
     return jsonResponse_({ result: 'error', message: String(err) });
+  }
+}
+
+/**
+ * Converts any phone input into sheet-safe plain text.
+ * Example: "+91 9999999999" → "91 9999999999"
+ */
+function toSafePhoneText_(phone) {
+  var raw = String(phone || '').trim();
+
+  // Strip formula markers Sheets misreads
+  raw = raw.replace(/^['=]+/, '').trim();
+
+  // Normalize "+91 ..." / "91 ..." / bare 10-digit
+  var digits = raw.replace(/\D/g, '');
+  if (digits.length === 12 && digits.indexOf('91') === 0) {
+    return '91 ' + digits.slice(2);
+  }
+  if (digits.length === 10) {
+    return '91 ' + digits;
+  }
+  if (digits.length > 0) {
+    return digits;
+  }
+  return raw.replace(/^\+/, '');
+}
+
+function ensurePhoneColumnIsText_(sheet) {
+  sheet.getRange('D:D').setNumberFormat('@');
+}
+
+/** One-time: Run this to repair existing #ERROR! phone cells */
+function fixExistingPhoneErrors() {
+  const sheet = getOrCreateSheet_();
+  ensurePhoneColumnIsText_(sheet);
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return;
+
+  for (var row = 2; row <= lastRow; row++) {
+    var cell = sheet.getRange(row, 4);
+    var formula = cell.getFormula();
+    var display = String(cell.getDisplayValue() || '');
+    var recovered = '';
+
+    if (formula) {
+      recovered = formula.replace(/^=/, '').trim();
+    } else if (display && display !== '#ERROR!') {
+      recovered = display;
+    }
+
+    cell.setNumberFormat('@').setValue(toSafePhoneText_(recovered));
   }
 }
 
@@ -46,6 +99,7 @@ function doGet() {
     status: 'ok',
     service: 'Royale Galaxy Leads Sheet',
     spreadsheetId: SPREADSHEET_ID,
+    sheet: SHEET_NAME,
     message: 'POST form leads to this URL.'
   });
 }
@@ -100,6 +154,7 @@ function getOrCreateSheet_() {
     ]);
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, 8).setFontWeight('bold');
+    ensurePhoneColumnIsText_(sheet);
   }
 
   return sheet;

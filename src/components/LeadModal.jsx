@@ -74,7 +74,8 @@ export default function LeadModal({ isOpen, onClose, initialIntent = 'Book Site 
     const sheetPayload = {
       name: fullName.trim(),
       email: cleanEmail,
-      phone: formattedPhone,
+      // Never send leading "+" — Google Sheets treats it as a formula (#ERROR!)
+      phone: `91 ${cleanDigits}`,
       configuration: unitType,
       intent: initialIntent,
       project: 'Royale Galaxy Kalyan East',
