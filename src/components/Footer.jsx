@@ -98,7 +98,12 @@ export default function Footer({ onOpenLeadModal }) {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <Mail size={18} style={{ color: 'var(--gold-primary)', flexShrink: 0 }} />
-                <span>info@royalegroup.org</span>
+                <a
+                  href="mailto:Royalegalaxysales@gmail.com"
+                  style={{ color: 'var(--text-primary)', textDecoration: 'none', wordBreak: 'break-all' }}
+                >
+                  Royalegalaxysales@gmail.com
+                </a>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <Globe size={18} style={{ color: 'var(--gold-primary)', flexShrink: 0 }} />
