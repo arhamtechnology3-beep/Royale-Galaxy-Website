@@ -152,7 +152,7 @@ app.post('/api/send-lead', async (req, res) => {
             <div class="footer">
               <strong>Royale Galaxy Sales Lounge</strong><br>
               Survey No. 36 Hissa 4 & S.No 45 H.No 9/3, Near Varsha Complex, Malang Road, Kalyan (E)<br>
-              Direct Call / WhatsApp: +91 91 52 52 52 68 | Email: ${senderEmail}<br>
+              Direct Call / WhatsApp: +91 84228 61469 | Email: ${senderEmail}<br>
               MahaRERA Registered Project PR1330002502267
             </div>
           </div>

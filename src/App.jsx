@@ -48,7 +48,7 @@ export default function App() {
 
       {/* Floating WhatsApp Action Button */}
       <a
-        href="https://wa.me/919152525268?text=Hi,%20I%20am%20interested%20in%20Royale%20Galaxy%20Kalyan%20East.%20Please%20send%20brochure%20and%20pricing%20details."
+        href="https://wa.me/918422861469?text=Hi,%20I%20am%20interested%20in%20Royale%20Galaxy%20Kalyan%20East.%20Please%20send%20brochure%20and%20pricing%20details."
         target="_blank"
         rel="noreferrer"
         className="whatsapp-float-btn"
