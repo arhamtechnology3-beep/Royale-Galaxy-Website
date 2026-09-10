@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProjectOverview from './components/ProjectOverview';
@@ -14,6 +14,12 @@ import { Phone, Calendar } from 'lucide-react';
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalIntent, setModalIntent] = useState('Book VIP Site Visit');
+
+  useEffect(() => {
+    const blockContextMenu = (e) => e.preventDefault();
+    document.addEventListener('contextmenu', blockContextMenu);
+    return () => document.removeEventListener('contextmenu', blockContextMenu);
+  }, []);
 
   const handleOpenLeadModal = (intent = 'Book VIP Site Visit') => {
     setModalIntent(intent);
